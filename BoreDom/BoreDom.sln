@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34009.444
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoreDom", "BoreDom\BoreDom.csproj", "{9F24F994-0200-4106-A3FB-603550D49258}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoreDom", "BoreDom\BoreDom.csproj", "{9F24F994-0200-4106-A3FB-603550D49258}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoreDom.Data", "BoreDom.Data\BoreDom.Data.csproj", "{BFD67F25-EA3F-486B-8B9E-9C4171B2BB61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9F24F994-0200-4106-A3FB-603550D49258}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F24F994-0200-4106-A3FB-603550D49258}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F24F994-0200-4106-A3FB-603550D49258}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD67F25-EA3F-486B-8B9E-9C4171B2BB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD67F25-EA3F-486B-8B9E-9C4171B2BB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD67F25-EA3F-486B-8B9E-9C4171B2BB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD67F25-EA3F-486B-8B9E-9C4171B2BB61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
