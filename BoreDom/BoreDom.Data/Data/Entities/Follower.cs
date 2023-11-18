@@ -5,14 +5,10 @@ namespace BoreDom.Data.Entities
 {
     public class Follower
     {
-       public string? FollowerID {get;set;}
-       [ForeignKey(nameof(FollowerID))]
-        public User Followers {get;set;} = null!;
-
-       public string? FollowedID {get;set;}
-       [ForeignKey(nameof(FollowedID))]
-       public User ReverseFollowers {get;set;} = null!;
-       
+        public string FollowerID { get; set; } = null!;
+        public virtual User FollowerUser { get; set; } = null!;
+        public string FollowedID { get; set; } = null!;
+        public virtual User FollowedUser { get; set; } = null!;
 
     }
 }

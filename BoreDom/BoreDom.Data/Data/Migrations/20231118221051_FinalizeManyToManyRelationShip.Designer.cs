@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoreDom.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231118203657_FollowerTable")]
-    partial class FollowerTable
+    [Migration("20231118221051_FinalizeManyToManyRelationShip")]
+    partial class FinalizeManyToManyRelationShip
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,7 +36,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("FollowedID");
 
-                    b.ToTable("Follower");
+                    b.ToTable("Followers");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
@@ -61,7 +61,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Like");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Post", b =>
@@ -455,21 +455,21 @@ namespace BoreDom.Data.Migrations
 
             modelBuilder.Entity("BoreDom.Data.Entities.Follower", b =>
                 {
-                    b.HasOne("BoreDom.Data.Entities.User", "ReverseFollowers")
-                        .WithMany()
+                    b.HasOne("BoreDom.Data.Entities.User", "FollowedUser")
+                        .WithMany("Followeed")
                         .HasForeignKey("FollowedID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("BoreDom.Data.Entities.User", "Followers")
-                        .WithMany()
+                    b.HasOne("BoreDom.Data.Entities.User", "FollowerUser")
+                        .WithMany("Followers")
                         .HasForeignKey("FollowerID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Followers");
+                    b.Navigation("FollowedUser");
 
-                    b.Navigation("ReverseFollowers");
+                    b.Navigation("FollowerUser");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
@@ -580,6 +580,10 @@ namespace BoreDom.Data.Migrations
 
             modelBuilder.Entity("BoreDom.Data.Entities.User", b =>
                 {
+                    b.Navigation("Followeed");
+
+                    b.Navigation("Followers");
+
                     b.Navigation("Likes");
 
                     b.Navigation("UserPosts");
