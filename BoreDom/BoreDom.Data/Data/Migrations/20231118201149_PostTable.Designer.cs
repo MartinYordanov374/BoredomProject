@@ -4,6 +4,7 @@ using BoreDom.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoreDom.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118201149_PostTable")]
+    partial class PostTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,46 +23,6 @@ namespace BoreDom.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("BoreDom.Data.Entities.Follower", b =>
-                {
-                    b.Property<string>("FollowerID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FollowedID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("FollowerID", "FollowedID");
-
-                    b.HasIndex("FollowedID");
-
-                    b.ToTable("Follower");
-                });
-
-            modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
-                {
-                    b.Property<Guid>("LikeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LikerID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("PostID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("LikeID");
-
-                    b.HasIndex("PostID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Like");
-                });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Post", b =>
                 {
@@ -451,42 +413,6 @@ namespace BoreDom.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BoreDom.Data.Entities.Follower", b =>
-                {
-                    b.HasOne("BoreDom.Data.Entities.User", "ReverseFollowers")
-                        .WithMany()
-                        .HasForeignKey("FollowedID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BoreDom.Data.Entities.User", "Followers")
-                        .WithMany()
-                        .HasForeignKey("FollowerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Followers");
-
-                    b.Navigation("ReverseFollowers");
-                });
-
-            modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
-                {
-                    b.HasOne("BoreDom.Data.Entities.Post", "Post")
-                        .WithMany("Likes")
-                        .HasForeignKey("PostID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BoreDom.Data.Entities.User", "User")
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BoreDom.Data.Entities.Post", b =>
                 {
                     b.HasOne("BoreDom.Data.Entities.Post", "Parent")
@@ -566,11 +492,6 @@ namespace BoreDom.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BoreDom.Data.Entities.Post", b =>
-                {
-                    b.Navigation("Likes");
-                });
-
             modelBuilder.Entity("BoreDom.Data.Entities.ProfilePicture", b =>
                 {
                     b.Navigation("Users");
@@ -578,8 +499,6 @@ namespace BoreDom.Data.Migrations
 
             modelBuilder.Entity("BoreDom.Data.Entities.User", b =>
                 {
-                    b.Navigation("Likes");
-
                     b.Navigation("UserPosts");
                 });
 #pragma warning restore 612, 618

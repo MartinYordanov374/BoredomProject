@@ -4,6 +4,7 @@ using BoreDom.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoreDom.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118202839_LikeTable")]
+    partial class LikeTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +23,6 @@ namespace BoreDom.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("BoreDom.Data.Entities.Follower", b =>
-                {
-                    b.Property<string>("FollowerID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FollowedID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("FollowerID", "FollowedID");
-
-                    b.HasIndex("FollowedID");
-
-                    b.ToTable("Follower");
-                });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
                 {
@@ -59,7 +46,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Like");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Post", b =>
@@ -449,25 +436,6 @@ namespace BoreDom.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("BoreDom.Data.Entities.Follower", b =>
-                {
-                    b.HasOne("BoreDom.Data.Entities.User", "ReverseFollowers")
-                        .WithMany()
-                        .HasForeignKey("FollowedID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BoreDom.Data.Entities.User", "Followers")
-                        .WithMany()
-                        .HasForeignKey("FollowerID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Followers");
-
-                    b.Navigation("ReverseFollowers");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
