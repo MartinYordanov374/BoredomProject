@@ -4,6 +4,7 @@ using BoreDom.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BoreDom.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231118221051_FinalizeManyToManyRelationShip")]
+    partial class FinalizeManyToManyRelationShip
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("FollowedID");
 
-                    b.ToTable("Followers", (string)null);
+                    b.ToTable("Followers");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Like", b =>
@@ -59,7 +61,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Likes", (string)null);
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.Post", b =>
@@ -85,7 +87,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("PosterID");
 
-                    b.ToTable("Posts", (string)null);
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.ProfilePicture", b =>
@@ -100,7 +102,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("ProfilePictures", (string)null);
+                    b.ToTable("ProfilePictures");
                 });
 
             modelBuilder.Entity("BoreDom.Data.Entities.User", b =>
@@ -256,7 +258,7 @@ namespace BoreDom.Data.Migrations
 
                     b.HasIndex("Use");
 
-                    b.ToTable("Keys", (string)null);
+                    b.ToTable("Keys");
                 });
 
             modelBuilder.Entity("Duende.IdentityServer.EntityFramework.Entities.PersistedGrant", b =>
