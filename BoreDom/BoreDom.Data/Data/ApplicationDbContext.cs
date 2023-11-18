@@ -1,4 +1,5 @@
-﻿using BoreDom.Data.Entities;
+﻿using BoreDom.Data.Data.EntitiesConfiguration;
+using BoreDom.Data.Entities;
 using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
@@ -17,20 +18,8 @@ namespace BoreDom.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new FollowerEC());
             base.OnModelCreating(builder);
-            builder.Entity<Follower>().HasKey(f => new { f.FollowerID, f.FollowedID });
-
-            builder.Entity<Follower>()
-                .HasOne(f => f.FollowerUser)
-                .WithMany(u => u.Followers)
-                .HasForeignKey(f => f.FollowerID)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Follower>()
-               .HasOne(f => f.FollowedUser)
-               .WithMany(u => u.Followed)
-               .HasForeignKey(f => f.FollowedID)
-               .OnDelete(DeleteBehavior.Restrict);
         }
         public DbSet<ProfilePicture> ProfilePictures { get; set; } = null!;
         public override DbSet<User> Users { get; set; } = null!;
