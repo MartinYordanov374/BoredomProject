@@ -19,6 +19,8 @@ namespace BoreDom.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new FollowerEC());
+            builder.ApplyConfiguration(new BlocksEC());
+            builder.ApplyConfiguration(new ChatEC());
             base.OnModelCreating(builder);
         }
         public DbSet<ProfilePicture> ProfilePictures { get; set; } = null!;
@@ -26,5 +28,8 @@ namespace BoreDom.Data
         public DbSet<Post> Posts { get; set; } = null!;
         public DbSet<Like> Likes { get; set; } = null!;
         public DbSet<Follower> Followers { get; set; } = null!;
+        public DbSet<Shares> Shares { get; set; } = null!;
+        public DbSet<Blocks> Blocks { get; set; } = null!;
+        public DbSet<Chats> Chats { get; set; } = null!;
     }
 }
