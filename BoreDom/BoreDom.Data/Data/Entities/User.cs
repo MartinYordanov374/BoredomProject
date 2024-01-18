@@ -15,5 +15,7 @@ namespace BoreDom.Data.Entities
 
         public ICollection<Follower> Followers { get; set; } = new List<Follower>();
         public ICollection<Follower> Followed { get; set; } = new List<Follower>();
+        public ICollection<Blocks> Blocked { get; set; } = new List<Blocks>();
+        public ICollection<Chats> Chats { get; set; } = new List<Chats>();
     }
 }

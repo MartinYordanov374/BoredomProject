@@ -21,5 +21,6 @@ namespace BoreDom.Data.Entities
         public string Content {get;set;} = null!;
 
         public ICollection<Like> Likes {get;set;} = new List<Like>();
+        public ICollection<Shares> Shares { get;set; } = new List<Shares>();
     }
 }
